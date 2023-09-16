@@ -1,6 +1,6 @@
 import {Types} from "mongoose";
 
-export interface IUser {
+export interface IHero {
     _id: Types.ObjectId;
     nickname: string;
     real_name: string;
