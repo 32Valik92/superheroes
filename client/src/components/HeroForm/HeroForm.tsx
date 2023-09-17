@@ -1,9 +1,10 @@
-import {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
+import {joiResolver} from "@hookform/resolvers/joi";
+
 import {IHero} from "../../interfaces";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {heroesActions} from "../../redux";
-import {joiResolver} from "@hookform/resolvers/joi";
 import {formValidator} from "../../validators";
 import './HeroForm.css';
 
@@ -24,18 +25,10 @@ const HeroForm: FC<IProps> = () => {
     });
     const dispatch = useAppDispatch();
     const {heroForUpdate} = useAppSelector(state => state.heroesReducer);
-
-    useEffect(() => {
-        if (heroForUpdate) {
-            setValue('nickname', heroForUpdate.nickname)
-            setValue('real_name', heroForUpdate.real_name)
-            setValue('origin_description', heroForUpdate.origin_description)
-            setValue('superpowers', heroForUpdate.superpowers)
-            setValue('catch_phrase', heroForUpdate.catch_phrase)
-        }
-    }, [heroForUpdate])
+    const [base64Image, setBase64Image] = useState(null);
 
     const save: SubmitHandler<IHero> = async (hero) => {
+        // console.log(hero)
         await dispatch(heroesActions.create({hero}));
         reset();
     };
@@ -44,9 +37,48 @@ const HeroForm: FC<IProps> = () => {
         await dispatch(heroesActions.update({id: heroForUpdate._id, hero}));
         reset();
     }
+
+    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                if (typeof reader.result === 'string') {
+                    setBase64Image(reader.result);
+                    setValue('image', reader.result)
+                    // console.log(typeof reader.result);
+                }
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
+
+    useEffect(() => {
+        if (heroForUpdate) {
+            setValue('nickname', heroForUpdate.nickname)
+            setValue('real_name', heroForUpdate.real_name)
+            setValue('origin_description', heroForUpdate.origin_description)
+            setValue('superpowers', heroForUpdate.superpowers)
+            setValue('catch_phrase', heroForUpdate.catch_phrase)
+            setValue('image', heroForUpdate.image)
+        }
+    }, [heroForUpdate])
+
     return (
         <div className={'divForm'}>
+
             <form onSubmit={handleSubmit(heroForUpdate ? update : save)} className={'form'}>
+
+                <div className={'fileInputDiv'}>
+                    <input type="file" accept="image/*" onChange={handleImageUpload} className="fileInput"/>
+                    <label htmlFor="file" className="inputLabel">
+                        {base64Image || heroForUpdate ? 'Завантажено' : 'Виберіть файл'}
+                    </label>
+                </div>
+
                 <div className={'input'}>
                     <input type="text" placeholder={'nickname'} {...register('nickname')}/>
                 </div>
@@ -67,7 +99,6 @@ const HeroForm: FC<IProps> = () => {
                     <div className={'errorsText'}>{Object.values(errors)[0].message}</div>}
 
                 <div className={'button'}>
-                    {/*<button disabled={!isValid}>{heroForUpdate ? 'Update' : 'Save'}</button>*/}
                     <button disabled={!isValid} className={'container disabled'}>
                         <span className={'button__line button__line--top'}></span>
                         <span className={'button__line button__line--right'}></span>
@@ -76,7 +107,9 @@ const HeroForm: FC<IProps> = () => {
                         {heroForUpdate ? 'Update' : 'Save'}
                     </button>
                 </div>
+
             </form>
+
         </div>
     );
 };

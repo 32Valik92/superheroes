@@ -12,7 +12,7 @@
     border-radius: 10px;
     width: 650px;
     background-color: white;
-    margin: 20px 0 0 50px;
+    margin: 20px;
     max-height: 535px;
     padding: 20px;
 }
@@ -29,4 +29,14 @@
     color: white;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.heroImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroImg img {
+    height: 200px;
 }

@@ -24,6 +24,9 @@ const heroSchema = new Schema({
         type: String,
         trim: true,
     },
+    image: {
+        type: String
+    }
 }, {
     versionKey: false,
     timestamps: true

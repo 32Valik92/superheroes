@@ -11,5 +11,6 @@ export const formValidator = Joi.object({
     superpowers: Joi.string().required(),
     catch_phrase: Joi.string().required().regex(/^"([^"]*)"$/).messages({
         'string.pattern.base': 'You have to use "your text" in catch_phrase'
-    })
+    }),
+    image: Joi.string().dataUri().required()
 })

@@ -12,7 +12,7 @@ interface IProps {
 const Hero: FC<IProps> = ({hero}) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const {_id, nickname} = hero;
+    const {_id, nickname, image} = hero;
 
     const heroInfo = (): void => {
         localStorage.setItem('choseHeroId', `${_id}`);
@@ -22,7 +22,7 @@ const Hero: FC<IProps> = ({hero}) => {
         <div className={'heroCard'}>
             <div onClick={heroInfo} className={'heroInfo'}>
                 <div>{nickname}</div>
-                <div>images</div>
+                <div className={'heroImage'}><img src={image} alt={nickname}/></div>
             </div>
             <div className={'updateAndDelete'}>
                 <button onClick={() => dispatch(heroesActions.setHeroForUpdate(hero))}>update</button>

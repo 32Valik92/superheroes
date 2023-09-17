@@ -20,7 +20,11 @@ const HeroInfo: FC<IProps> = () => {
     return (
         chosenHero && (
             <div className={'heroInfoDiv'}>
-                <div className={'heroImg'}>image</div>
+
+                <div className={'heroImg'}>
+                    <img src={chosenHero.image} alt={chosenHero.nickname}/>
+                </div>
+
                 <div className={'infoAboutHero'}>
                     <div>id: {chosenHero._id}</div>
                     <div>nickname: {chosenHero.nickname}</div>
@@ -29,6 +33,7 @@ const HeroInfo: FC<IProps> = () => {
                     <div>superpowers: {chosenHero.superpowers}</div>
                     <div>catch_phrase: {chosenHero.catch_phrase}</div>
                 </div>
+
             </div>
         )
     );
