@@ -1,0 +1,49 @@
+.heroCard {
+    border: black solid 2px;
+    width: 200px;
+    margin: 10px;
+    background: #A0A0A0;
+
+    box-sizing: border-box;
+
+}
+
+.updateAndDelete {
+    border: purple solid 2px;
+}
+
+.heroCard:hover {
+    border: none;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.5); /* Add Box Shadow */
+}
+
+.heroInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heroInfo {
+    cursor: pointer;
+}
+
+.updateAndDelete {
+    display: flex;
+    justify-content: space-around;
+    margin: 5px 10px;
+}
+
+.updateAndDelete button {
+    box-sizing: border-box;
+    width: 70px;
+    height: 35px;
+    padding: 10px 0;
+
+    font-size: 12px;
+    background-color: #000000;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}

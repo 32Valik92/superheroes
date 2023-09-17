@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    background-color: #141612;
+    justify-content: space-around;
+
+    height: 65px;
+}
+
+.headerLink {
+    display: flex;
+    justify-content: center;
+
+    width: 40%;
+    font-size: 25px;
+}
+
+.link {
+    text-align: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    padding: 15px;
+    width: 50%;
+    font-weight: bold;
+}
+
+.link:hover {
+    filter: drop-shadow(0 0 20px #FFFFFF) drop-shadow(0 0 30px #FFFFFF);
+}

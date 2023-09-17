@@ -9,7 +9,7 @@ class HeroService {
             const skip = 5 * (+page - 1);
 
             const [heroes, heroesTotalCount] = await Promise.all([
-                Hero.find().limit(5).skip(skip),
+                Hero.find().limit(5).skip(skip).sort({ createdAt: -1 }),
                 Hero.count()
             ]);
 

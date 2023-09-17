@@ -1,19 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
-import {IUser} from "./interfaces";
+import React from 'react';
+import {Navigate, Route, Routes} from "react-router-dom";
+
+import {MainLayout} from "./layouts";
+import {HeroesPage, HeroInfoPage} from "./pages";
 
 const App = () => {
-    const [back, setBack] = useState<IUser[]>()
-
-    // let axiosService = axios.create({baseURL: "http://localhost:5000/"});
-    useEffect(() => {
-        axios.get("http://localhost:5000/heroes").then(r => setBack(r.data))
-
-    }, [back])
     return (
-        <div className={'ssss'}>
-            {back && back.map((value, index) => <p key={index}>{value.nickname}</p>)}
-        </div>
+        <Routes>
+            <Route path={'/'} element={<MainLayout/>}>
+                <Route index element={<Navigate to={'heroes'}/>}/>
+                <Route path={'heroes'} element={<HeroesPage/>}/>
+                <Route path={'heroInfo'} element={<HeroInfoPage/>}/>
+            </Route>
+        </Routes>
     );
 };
 

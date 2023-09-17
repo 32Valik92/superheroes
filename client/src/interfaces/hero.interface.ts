@@ -1,5 +1,5 @@
-export interface IUser {
-    _id: string;
+export interface IHero {
+    _id?: string;
     nickname: string;
     real_name: string;
     origin_description: string;
