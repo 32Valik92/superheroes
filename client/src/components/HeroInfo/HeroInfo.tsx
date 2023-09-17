@@ -28,7 +28,9 @@ const HeroInfo: FC<IProps> = () => {
                     {
                         !chosenHero.image
                             ?
-                            <h3>This hero doesn't have image</h3>
+                            <div className={'textNoImage'}>
+                                <h3>This hero doesn't have image</h3>
+                            </div>
                             :
                             <div className={'heroImg'}>
                                 <img src={chosenHero.image} alt={chosenHero.nickname}/>

@@ -4,15 +4,22 @@
     margin: 10px;
     background: #A0A0A0;
     box-sizing: border-box;
+    border-radius: 10px;
 }
 
-.updateAndDelete {
-    border: purple solid 2px;
+.nickname {
+    color: black;
+    margin: 5px 0;
+}
+
+h3 {
+    color: white;
+    text-align: center;
 }
 
 .heroCard:hover {
     border: none;
-    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.5); /* Add Box Shadow */
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.8); /* Add Box Shadow */
 }
 
 .heroInfo {
@@ -21,6 +28,7 @@
     align-items: center;
     cursor: pointer;
     box-sizing: border-box;
+    height: 200px;
 }
 
 .heroImage {

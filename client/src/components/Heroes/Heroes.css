@@ -1,17 +1,12 @@
 .heroesComponent {
-    border: #00008B solid 3px;
+    background: white;
     display: flex;
     flex-direction: column;
 }
 
 .heroes {
-    border: red solid 3px;
     display: flex;
     justify-content: space-evenly;
-}
-
-.pagination {
-    border: darkgreen solid 3px;
 }
 
 .pagination {
@@ -27,7 +22,7 @@
     padding: 10px 0;
 
     font-size: 18px;
-    background-color: #000000;
+    background-color: #141612;
     color: #fff;
     border: 1px solid #fff;
     border-radius: 5px;

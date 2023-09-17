@@ -1,5 +1,6 @@
 .heroInfoPage {
-    background: darkgreen;
+    background: #141612;
+    min-height: calc(100vh - 65px);
 }
 
 .containerInfo {
@@ -10,6 +11,12 @@
 .heroInfoDiv {
     display: flex;
     justify-content: space-evenly;
+}
+
+.textNoImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .infoAboutHero {
@@ -23,13 +30,13 @@
 
 .infoAboutHero div {
     margin-bottom: 5px;
-    color: #CCCCCC;
+    color: #141612;
     font-weight: bold;
     padding: 2px 4px;
 }
 
 .infoAboutHero div:hover {
-    background-color: #CCCCCC;
+    background-color: #141612;
     color: white;
     border-radius: 4px;
     cursor: pointer;

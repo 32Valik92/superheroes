@@ -24,7 +24,7 @@ const Hero: FC<IProps> = ({hero}) => {
         <div className={'heroCard'}>
 
             <div onClick={heroInfo} className={'heroInfo'}>
-                <div>{nickname}</div>
+                <div><h3 className={'nickname'}>{nickname}</h3></div>
                 {
                     !image
                         ?

@@ -1,6 +1,6 @@
 .header {
     display: flex;
-    background-color: #141612;
+    background-color: white;
     justify-content: space-around;
 
     height: 65px;
@@ -17,12 +17,12 @@
 .link {
     text-align: center;
     text-decoration: none;
-    color: #FFFFFF;
+    color: #141612;
     padding: 15px;
     width: 50%;
     font-weight: bold;
 }
 
 .link:hover {
-    filter: drop-shadow(0 0 20px #FFFFFF) drop-shadow(0 0 30px #FFFFFF);
+    filter: drop-shadow(0 0 20px #141612) drop-shadow(0 0 30px #141612) drop-shadow(0 0 40px #141612);
 }
