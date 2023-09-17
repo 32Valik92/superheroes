@@ -35,11 +35,14 @@ const Heroes: FC<IProps> = () => {
             </div>
 
             {/* Pagination */}
-            <div className={'pagination'}>
-                <button disabled={page === 1} onClick={(): void => paginationFunc('prev')}> prev page</button>
-                <button disabled={page * 5 >= itemsCount} onClick={(): void => paginationFunc('next')}> next page
-                </button>
-            </div>
+            {
+                !(heroes.length === 0) &&
+                <div className={'pagination'}>
+                    <button disabled={page === 1} onClick={(): void => paginationFunc('prev')}> prev page</button>
+                    <button disabled={page * 5 >= itemsCount} onClick={(): void => paginationFunc('next')}> next page
+                    </button>
+                </div>
+            }
 
         </div>
 
