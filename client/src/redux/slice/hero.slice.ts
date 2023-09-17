@@ -1,15 +1,17 @@
-import {IHero} from "../../interfaces";
 import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
-import {heroService} from "../../services";
 import {AxiosError} from "axios";
-import {IPagination} from "../../interfaces/pagination.interface";
+
+import {IHero, IImage} from "../../interfaces";
+import {heroService} from "../../services";
+import {IPagination} from "../../interfaces";
 
 interface IState {
-    heroes: IHero[],
+    heroes: IHero[];
     page: number;
-    trigger: boolean,
-    heroForUpdate: IHero
-    chosenHero: IHero
+    trigger: boolean;
+    heroForUpdate: IHero;
+    chosenHero: IHero;
+    itemsCount: number;
 }
 
 const initialState: IState = {
@@ -17,7 +19,8 @@ const initialState: IState = {
     page: 1,
     trigger: false,
     heroForUpdate: null,
-    chosenHero: null
+    chosenHero: null,
+    itemsCount: 0
 }
 
 const getAll = createAsyncThunk<IPagination<IHero[]>, { page: number }>(
@@ -62,13 +65,13 @@ const update = createAsyncThunk<void, { hero: IHero, id: string }>(
     'heroSlice/update',
     async ({id, hero}, {rejectWithValue}) => {
         try {
-            await heroService.updateById(id, hero)
+            await heroService.updateById(id, hero);
         } catch (e) {
             const err = e as AxiosError;
             return rejectWithValue(err.response.data);
         }
     }
-)
+);
 
 const deleteHero = createAsyncThunk<void, { id: string }>(
     'heroSlice/deleteHero',
@@ -80,22 +83,47 @@ const deleteHero = createAsyncThunk<void, { id: string }>(
             return rejectWithValue(err.response.data);
         }
     }
-)
+);
+
+const pushImageById = createAsyncThunk<void, { id: string, imageData: IImage }>(
+    'heroSlice/pushImageById',
+    async ({id, imageData}, {rejectWithValue}) => {
+        try {
+            await heroService.pushImageById(id, imageData);
+        } catch (e) {
+            const err = e as AxiosError;
+            return rejectWithValue(err.response.data);
+        }
+    }
+);
+
+const deleteImage = createAsyncThunk<void, { id: string, index: number }>(
+    'heroSlice/deleteImage',
+    async ({id, index}, {rejectWithValue}) => {
+        try {
+            await heroService.deleteImage(id, index);
+        } catch (e) {
+            const err = e as AxiosError;
+            return rejectWithValue(err.response.data);
+        }
+    }
+);
 
 const slice = createSlice({
     name: 'heroSlice',
     initialState,
     reducers: {
         setHeroForUpdate: (state, action) => {
-            state.heroForUpdate = action.payload
+            state.heroForUpdate = action.payload;
         }
     },
     extraReducers: builder =>
         builder
             .addCase(getAll.fulfilled, (state, action) => {
-                const {page, data} = action.payload;
+                const {page, data, itemsCount} = action.payload;
                 state.heroes = data;
                 state.page = page;
+                state.itemsCount = itemsCount;
             })
             .addCase(getHeroById.fulfilled, (state, action) => {
                 state.chosenHero = action.payload;
@@ -103,7 +131,7 @@ const slice = createSlice({
             .addCase(update.fulfilled, state => {
                 state.heroForUpdate = null;
             })
-            .addMatcher(isFulfilled(create, update, deleteHero), state => {
+            .addMatcher(isFulfilled(create, update, deleteHero, pushImageById, deleteImage), state => {
                 state.trigger = !state.trigger;
             })
             .addMatcher(isFulfilled(deleteHero), state => {
@@ -119,7 +147,9 @@ const heroesActions = {
     getHeroById,
     create,
     update,
-    deleteHero
+    deleteHero,
+    pushImageById,
+    deleteImage
 }
 
 export {

@@ -10,12 +10,15 @@ interface IProps {
 const Header: FC<IProps> = () => {
     return (
         <div className={'header'}>
+
             <div className={'headerLink'}>
                 <NavLink to={'heroes?page=1'} className={'link'}>Heroes</NavLink>
             </div>
+
             <div className={'headerLink'}>
                 <NavLink to={'heroInfo'} className={'link'}>HeroInfoPage</NavLink>
             </div>
+
         </div>
     );
 };

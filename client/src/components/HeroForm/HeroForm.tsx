@@ -28,7 +28,6 @@ const HeroForm: FC<IProps> = () => {
     const [base64Image, setBase64Image] = useState(null);
 
     const save: SubmitHandler<IHero> = async (hero) => {
-        // console.log(hero)
         await dispatch(heroesActions.create({hero}));
         reset();
     };
@@ -48,7 +47,6 @@ const HeroForm: FC<IProps> = () => {
                 if (typeof reader.result === 'string') {
                     setBase64Image(reader.result);
                     setValue('image', reader.result)
-                    // console.log(typeof reader.result);
                 }
             };
 
@@ -63,7 +61,6 @@ const HeroForm: FC<IProps> = () => {
             setValue('origin_description', heroForUpdate.origin_description)
             setValue('superpowers', heroForUpdate.superpowers)
             setValue('catch_phrase', heroForUpdate.catch_phrase)
-            setValue('image', heroForUpdate.image)
         }
     }, [heroForUpdate])
 
@@ -72,12 +69,15 @@ const HeroForm: FC<IProps> = () => {
 
             <form onSubmit={handleSubmit(heroForUpdate ? update : save)} className={'form'}>
 
-                <div className={'fileInputDiv'}>
-                    <input type="file" accept="image/*" onChange={handleImageUpload} className="fileInput"/>
-                    <label htmlFor="file" className="inputLabel">
-                        {base64Image || heroForUpdate ? 'Завантажено' : 'Виберіть файл'}
-                    </label>
-                </div>
+                {
+                    !heroForUpdate &&
+                    <div className={'fileInputDiv'}>
+                        <input type="file" accept="image/*" onChange={handleImageUpload} className="fileInput"/>
+                        <label htmlFor="file" className="inputLabel">
+                            {base64Image || heroForUpdate ? 'Uploaded' : 'Upload a photo'}
+                        </label>
+                    </div>
+                }
 
                 <div className={'input'}>
                     <input type="text" placeholder={'nickname'} {...register('nickname')}/>
@@ -104,7 +104,7 @@ const HeroForm: FC<IProps> = () => {
                         <span className={'button__line button__line--right'}></span>
                         <span className={'button__line button__line--bottom'}></span>
                         <span className={'button__line button__line--left'}></span>
-                        {heroForUpdate ? 'Update' : 'Save'}
+                        {heroForUpdate ? 'Update' : 'Register superhero'}
                     </button>
                 </div>
 

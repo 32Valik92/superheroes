@@ -6,4 +6,5 @@ export interface IHero {
     superpowers: string;
     catch_phrase: string;
     image: string;
+    imagesList: string[];
 }

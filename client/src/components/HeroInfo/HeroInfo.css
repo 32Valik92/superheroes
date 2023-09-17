@@ -1,6 +1,10 @@
 .heroInfoPage {
-    height: calc(100vh - 65px);
-    background: #00008B;
+    background: darkgreen;
+}
+
+.containerInfo {
+    display: flex;
+    flex-direction: column;
 }
 
 .heroInfoDiv {

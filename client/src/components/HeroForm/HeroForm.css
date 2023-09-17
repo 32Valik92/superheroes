@@ -150,8 +150,6 @@
     display: inline-block;
     overflow: hidden;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    /*padding: 8px;*/
 }
 
 .fileInput {
@@ -170,7 +168,6 @@
     background-color: #A0A0A0;
     box-shadow: 0 0 0 white;
     color: #fff;
-    border-radius: 4px;
     cursor: pointer;
     user-select: none;
 }

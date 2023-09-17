@@ -27,4 +27,14 @@ router.delete("/:id",
     heroController.deleteById
 );
 
+router.put(
+    "/image/:id",
+    heroController.pushImageById
+);
+
+router.delete(
+    "/image/:id/:index",
+    heroController.deleteImage
+);
+
 export const heroRouter = router;

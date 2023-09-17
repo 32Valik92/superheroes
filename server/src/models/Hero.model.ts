@@ -1,7 +1,7 @@
 import {Schema, model} from "mongoose";
 
 const heroSchema = new Schema({
-    nickname:         {
+    nickname: {
         type: String,
         require: true,
         lowercase: true,
@@ -26,6 +26,10 @@ const heroSchema = new Schema({
     },
     image: {
         type: String
+    },
+    imagesList: {
+        type: [String],
+        default: []
     }
 }, {
     versionKey: false,

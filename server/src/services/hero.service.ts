@@ -1,4 +1,4 @@
-import {IHero, IPaginationResponse, IQuery} from "../interfaces";
+import {IHero, IImage, IPaginationResponse, IQuery} from "../interfaces";
 import {Hero} from "../models";
 import {ApiError} from "../errors";
 
@@ -9,7 +9,7 @@ class HeroService {
             const skip = 5 * (+page - 1);
 
             const [heroes, heroesTotalCount] = await Promise.all([
-                Hero.find().limit(5).skip(skip).sort({ createdAt: -1 }),
+                Hero.find().limit(5).skip(skip).sort({createdAt: -1}),
                 Hero.count()
             ]);
 
@@ -21,11 +21,11 @@ class HeroService {
         } catch (e) {
             throw new ApiError(e.message, e.status);
         }
-    }
+    };
 
     public async getById(id: string): Promise<IHero> {
         return await this.getIneByIdOrThrow(id);
-    }
+    };
 
     public async create(data: IHero): Promise<void> {
         try {
@@ -33,7 +33,7 @@ class HeroService {
         } catch (e) {
             throw new ApiError(e.message, e.status);
         }
-    }
+    };
 
     public async updateById(id: string, data: Partial<IHero>): Promise<IHero> {
         await this.getIneByIdOrThrow(id);
@@ -43,13 +43,38 @@ class HeroService {
             {...data},
             {returnDocument: "after"}
         );
-    }
+    };
+
+    public async pushImageById(id: string, data: Partial<IImage>): Promise<IHero> {
+        await this.getIneByIdOrThrow(id);
+
+        return Hero.findOneAndUpdate(
+            {_id: id},
+            {$push: {imagesList: data.image}},
+            {returnDocument: "after"}
+        );
+    };
 
     public async deleteById(id: string): Promise<void> {
         await this.getIneByIdOrThrow(id);
 
         await Hero.deleteOne({_id: id});
-    }
+    };
+
+    public async deleteImage(id: string, index: number): Promise<void> {
+        await Promise.all([
+            this.getIneByIdOrThrow(id),
+            Hero.updateOne(
+                {_id: id},
+                // {$pull: {imagesList: `${imgData}`}}
+                {$unset: {[`imagesList.${index}`]: 1}}
+            ),
+            Hero.updateOne(
+                {_id: id},
+                {$pull: {imagesList: null}}
+            )
+        ])
+    };
 
     private async getIneByIdOrThrow(id: string): Promise<IHero> {
         const hero = await Hero.findById({_id: id}) as IHero;
@@ -59,7 +84,7 @@ class HeroService {
         }
 
         return hero;
-    }
+    };
 
 }
 

@@ -1,4 +1,5 @@
 import {FC} from 'react';
+
 import {HeroInfo} from "../../components";
 
 interface IProps {

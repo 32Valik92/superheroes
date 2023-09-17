@@ -18,7 +18,7 @@ class HeroMiddleware {
                 next(e);
             }
         }
-    }
+    };
 }
 
 export const heroMiddleware = new HeroMiddleware();
