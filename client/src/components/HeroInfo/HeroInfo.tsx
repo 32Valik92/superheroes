@@ -17,7 +17,7 @@ const HeroInfo: FC<IProps> = () => {
     const chosenHeroId = localStorage.getItem('choseHeroId');
 
     useEffect(() => {
-        if (chosenHeroId && chosenHero) {
+        if (chosenHeroId) {
             dispatch(heroesActions.getHeroById({id: chosenHeroId}))
         }
     }, [dispatch, chosenHeroId, trigger])
