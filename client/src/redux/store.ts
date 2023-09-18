@@ -10,6 +10,7 @@ const setupStore = () => configureStore({
     reducer: rootReducer
 })
 
+// Types for custom useSelector and useDispatch
 type RootState = ReturnType<typeof rootReducer>
 type AppStore = ReturnType<typeof setupStore>
 type AppDispatch = AppStore['dispatch']

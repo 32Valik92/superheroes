@@ -16,6 +16,7 @@ const Hero: FC<IProps> = ({hero}) => {
 
     const {_id, nickname, image} = hero;
 
+    // Function for put _id to localStorage and navigate to hero info page
     const heroInfo = (): void => {
         localStorage.setItem('choseHeroId', `${_id}`);
         navigate('/heroInfo');

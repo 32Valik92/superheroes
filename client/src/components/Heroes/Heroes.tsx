@@ -16,6 +16,7 @@ const Heroes: FC<IProps> = () => {
     const [query, setQuery] = useSearchParams({page: '1'});
     const {heroes, trigger, page, itemsCount} = useAppSelector(state => state.heroesReducer);
 
+    // Function for pagination on Heroes page
     const paginationFunc = (button: string): void => {
         if (button === 'next') {
             setQuery(prev => ({...prev, page: +prev.get('page') + 1}));
@@ -24,6 +25,7 @@ const Heroes: FC<IProps> = () => {
         }
     }
 
+    // useEffect for getting all heroes from specific page
     useEffect(() => {
         dispatch(heroesActions.getAll({page: +query.get('page')}))
     }, [dispatch, query, trigger])

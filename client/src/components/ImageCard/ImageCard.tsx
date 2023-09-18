@@ -15,13 +15,12 @@ const ImageCard: FC<IProps> = ({id, imgData, index}) => {
     const {trigger} = useAppSelector(state => state.heroesReducer);
 
     useEffect(() => {
-
     }, [trigger]);
     return (
         <div className={'imageCard'}>
 
             <div className={'img'}>
-                <img src={imgData} alt={`photo`}/>
+                <img src={imgData} alt={`img`}/>
             </div>
 
             <div className='deleteButton'>

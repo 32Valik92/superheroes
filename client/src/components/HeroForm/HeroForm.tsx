@@ -25,24 +25,28 @@ const HeroForm: FC<IProps> = () => {
     });
     const dispatch = useAppDispatch();
     const {heroForUpdate} = useAppSelector(state => state.heroesReducer);
-    const [base64Image, setBase64Image] = useState(null);
+    const [base64Image, setBase64Image] = useState(null); // Our trigger for text on button
 
+    // Function for submit new Hero to DB
     const save: SubmitHandler<IHero> = async (hero) => {
         await dispatch(heroesActions.create({hero}));
         reset();
     };
 
+    // Function for update our Hero from DB
     const update: SubmitHandler<IHero> = async (hero) => {
         await dispatch(heroesActions.update({id: heroForUpdate._id, hero}));
         reset();
     }
 
+    // Function for convert image to base64 string
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
+        const file = event.target.files?.[0]; // get object event
 
         if (file) {
-            const reader = new FileReader();
+            const reader = new FileReader(); // const for helper read file
 
+            // After reading, we have callback
             reader.onloadend = () => {
                 if (typeof reader.result === 'string') {
                     setBase64Image(reader.result);
@@ -50,10 +54,11 @@ const HeroForm: FC<IProps> = () => {
                 }
             };
 
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(file); // convert to base64 string
         }
     };
 
+    // useEffect for looking for our heroForUpdate and set values to inputs
     useEffect(() => {
         if (heroForUpdate) {
             setValue('nickname', heroForUpdate.nickname)
@@ -62,7 +67,7 @@ const HeroForm: FC<IProps> = () => {
             setValue('superpowers', heroForUpdate.superpowers)
             setValue('catch_phrase', heroForUpdate.catch_phrase)
         }
-    }, [heroForUpdate])
+    }, [heroForUpdate, setValue])
 
     return (
         <div className={'divForm'}>
@@ -95,6 +100,7 @@ const HeroForm: FC<IProps> = () => {
                     <input type="text" placeholder={'catch_phrase'} {...register('catch_phrase')}/>
                 </div>
 
+                {/* div with errors from validators */}
                 {Object.keys(errors).length > 0 &&
                     <div className={'errorsText'}>{Object.values(errors)[0].message}</div>}
 

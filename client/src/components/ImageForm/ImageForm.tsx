@@ -16,15 +16,17 @@ const ImageForm: FC<IProps> = ({id}) => {
         setValue
     } = useForm<IImage>();
     const dispatch = useAppDispatch();
-    const [base64Image, setBase64Image] = useState(null);
+    const [base64Image, setBase64Image] = useState(null); // Our trigger for text on button
 
 
-    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const file = event.target.files?.[0];
+    // Function for convert image to base64 string
+    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0]; // get object event
 
         if (file) {
-            const reader = new FileReader();
+            const reader = new FileReader(); // const for helper read file
 
+            // After reading, we have callback
             reader.onloadend = () => {
                 if (typeof reader.result === 'string') {
                     setBase64Image(reader.result);
@@ -32,10 +34,11 @@ const ImageForm: FC<IProps> = ({id}) => {
                 }
             };
 
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(file); // convert to base64 string
         }
     };
 
+    // Function for submit new image to hero's image list
     const submit: SubmitHandler<IImage> = async (image) => {
         await dispatch(heroesActions.pushImageById({id, imageData: image}));
     };

@@ -14,8 +14,9 @@ const HeroInfo: FC<IProps> = () => {
     const dispatch = useAppDispatch();
     const {chosenHero, trigger} = useAppSelector(state => state.heroesReducer);
 
-    const chosenHeroId = localStorage.getItem('choseHeroId');
+    const chosenHeroId = localStorage.getItem('choseHeroId'); // chosenHeroId from localStorage
 
+    // useEffect for getting info about chosen Hero
     useEffect(() => {
         if (chosenHeroId) {
             dispatch(heroesActions.getHeroById({id: chosenHeroId}))
@@ -48,7 +49,9 @@ const HeroInfo: FC<IProps> = () => {
 
                     </div>
 
+                    {/* Mini form for upload images to chosen Hero*/}
                     <ImageForm key={0} id={chosenHeroId}></ImageForm>
+                    {/* Render hero's images */}
                     <ImagesList key={1} chosenHero={chosenHero}/>
 
                 </div>

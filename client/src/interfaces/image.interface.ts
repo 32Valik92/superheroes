@@ -1,3 +1,3 @@
 export interface IImage {
-    image: string
+    image: string;
 }

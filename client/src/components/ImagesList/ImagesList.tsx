@@ -15,9 +15,7 @@ const ImagesList: FC<IProps> = ({chosenHero}) => {
     const {imagesList} = chosenHero;
 
     useEffect(() => {
-
     }, [trigger])
-
     return (
         <div className={'listOfImages'}>
 
