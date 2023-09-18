@@ -4,6 +4,7 @@ import {isObjectIdOrHexString} from "mongoose";
 import {ApiError} from "../errors";
 
 class HeroMiddleware {
+    // Method for checking our id
     public idValid(idParam: string) {
         return (req: Request, res: Response, next: NextFunction): void => {
             try {
