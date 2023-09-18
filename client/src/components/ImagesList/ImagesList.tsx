@@ -19,7 +19,7 @@ const ImagesList: FC<IProps> = ({chosenHero}) => {
     return (
         <div className={'listOfImages'}>
 
-            <h2>↓ Heroes' images ↓</h2>
+            <h2>↓ Hero's images ↓</h2>
 
             <div className='cardsList'>
                 {imagesList.map((image, index) =>
