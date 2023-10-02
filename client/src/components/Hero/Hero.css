@@ -38,6 +38,7 @@ h3 {
 }
 
 .heroInfo .heroImage img {
+    height: 160px;
     width: 90%;
     margin: 3px;
 }
